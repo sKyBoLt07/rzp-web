@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="script.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  </head>
+  <body>
+    <h1>Hello there!</h1>
+    <button id="rzp-button1">Pay</button>
+    <script>
+      var options = {
+        key: 'key', // Enter the Key ID generated from the Dashboard
+        amount: '100', // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        currency: 'INR',
+        name: 'Nriway.com',
+        description: 'Test Total Transaction',
+        image: 'https://www.nriway.com/public/img/NRIway-logo.png',
+        order_id: 'test_order_1', //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        callback_url:
+          'https://www.nriway.com/nri-service/nri-documentation-services-india',
+        prefill: {
+          name: 'kishan test',
+          email: 'skybolt@blackzoid.com',
+          contact: '1122334455',
+        },
+        notes: {
+          address: 'Razorpay Corporate Office',
+        },
+        theme: {
+          color: '#ff7529',
+        },
+      };
+      var rzp1 = new Razorpay(options);
+      document.getElementById('rzp-button1').onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+      };
+    </script>
+    <!-- <script
+      data-key="{{ Config::get('custom.razor_key') }}"
+      data-amount="{{$total * 100}}"
+      data-buttontext="Pay {{$total}} INR"
+      data-name="Nriway.com"
+      data-description="Total"
+      data-image="https://www.nriway.com/public/img/NRIway-logo.png"
+      data-prefill.name="{{Auth::user()->name}}"
+      data-prefill.email="{{Auth::user()->email}}"
+      data-theme.color="#ff7529"
+    ></script> -->
+  </body>
+</html>
